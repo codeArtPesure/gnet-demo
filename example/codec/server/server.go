@@ -26,6 +26,16 @@ func (cs *codecServer) OnInitComplete(srv gnet.Server) (action gnet.Action) {
 	return
 }
 
+func (cs *codecServer) OnOpened(srv gnet.Conn) (out []byte, action gnet.Action) {
+	log.Println("a new connected start")
+	return
+}
+
+func (es *codecServer) OnClosed(c gnet.Conn, err error) (action gnet.Action) {
+	log.Println("connect was closed")
+	return
+}
+
 func (cs *codecServer) React(frame []byte, c gnet.Conn) (out []byte, action gnet.Action) {
 	if cs.async {
 		data := append([]byte{}, frame...)
